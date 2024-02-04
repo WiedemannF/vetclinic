@@ -1,12 +1,12 @@
 package com.javajunior.vetclinic.vetservice.service;
 
-import com.javajunior.vetclinic.vetservice.dto.DoctorDTO;
-import com.javajunior.vetclinic.vetservice.exception.NotFoundException;
-import com.javajunior.vetclinic.vetservice.model.Doctor;
+import com.javajunior.vetclinic.vetservice.model.dto.DoctorDTO;
+import com.javajunior.vetclinic.vetservice.model.domain.Doctor;
 import com.javajunior.vetclinic.vetservice.repository.DoctorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.webjars.NotFoundException;
 
 import java.util.List;
 
@@ -17,11 +17,7 @@ public class DoctorService {
 
     @Transactional
     public Doctor create(DoctorDTO doctor) {
-        return doctorRepository.save(Doctor.builder()
-                .name(doctor.getName())
-                .address(doctor.getAddress())
-                .phoneNumber(doctor.getPhoneNumber())
-                .build());
+        return DoctorDTO.map(doctor);
     }
 
     @Transactional(readOnly = true)
@@ -33,11 +29,6 @@ public class DoctorService {
     public Doctor getDoctorById(final Long id) throws NotFoundException {
         return doctorRepository.findById(id).orElseThrow(() -> new NotFoundException("Doctor with id " + id + " not found"));
     }
-
-//    @Transactional
-//    public Doctor update(Doctor doctor) {
-//        return doctorRepository.save(doctor);
-//    }
 
     @Transactional
     public Doctor update(Doctor newDoctor, Long id) throws NotFoundException {

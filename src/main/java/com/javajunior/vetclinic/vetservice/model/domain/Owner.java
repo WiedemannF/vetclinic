@@ -1,5 +1,6 @@
-package com.javajunior.vetclinic.vetservice.model;
+package com.javajunior.vetclinic.vetservice.model.domain;
 
+import com.javajunior.vetclinic.vetservice.model.dto.OwnerDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,4 +33,13 @@ public class Owner {
     @JoinColumn(name = "pets", nullable = false,
             foreignKey = @ForeignKey(name = "FK_OWNERS_PET"))
     private List<Pet> pets;
+
+    public OwnerDTO map(Owner owner) {
+        return OwnerDTO.builder()
+                .name(owner.getName())
+                .address(owner.getAddress())
+                .phoneNumber(owner.getPhoneNumber())
+                .pets(owner.getPets())
+                .build();
+    }
 }

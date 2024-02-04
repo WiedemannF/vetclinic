@@ -1,5 +1,6 @@
-package com.javajunior.vetclinic.vetservice.model;
+package com.javajunior.vetclinic.vetservice.model.domain;
 
+import com.javajunior.vetclinic.vetservice.model.dto.PetDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,7 +37,19 @@ public class Pet {
             foreignKey = @ForeignKey(name = "FK_PETS_OWNER"))
     private Owner owner;
 
+    @OneToOne
     @JoinColumn(name = "disease_history_id",
             foreignKey = @ForeignKey(name = "FK_PETS_DISEASE_HISTORY"))
     private DiseaseHistory diseaseHistory;
+
+    public PetDTO map(Pet pet) {
+        return PetDTO.builder()
+                .name(pet.getName())
+                .breed(pet.getBreed())
+                .sex(pet.getSex())
+                .dateOfBirth(pet.getDateOfBirth())
+                .owner(pet.getOwner())
+                .diseaseHistory(pet.getDiseaseHistory())
+                .build();
+    }
 }

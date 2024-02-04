@@ -1,5 +1,6 @@
-package com.javajunior.vetclinic.vetservice.model;
+package com.javajunior.vetclinic.vetservice.model.domain;
 
+import com.javajunior.vetclinic.vetservice.model.dto.DiseaseCaseDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,4 +29,12 @@ public class DiseaseCase {
 
     @Column(name = "case_description")
     private String caseDescription;
+
+    public DiseaseCaseDTO map(DiseaseCase diseaseCase) {
+        return DiseaseCaseDTO.builder()
+                .doctor(diseaseCase.getDoctor())
+                .date(diseaseCase.getDate())
+                .caseDescription(diseaseCase.getCaseDescription())
+                .build();
+    }
 }

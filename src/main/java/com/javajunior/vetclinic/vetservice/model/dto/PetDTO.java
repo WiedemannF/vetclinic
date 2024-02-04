@@ -1,13 +1,12 @@
-package com.javajunior.vetclinic.vetservice.dto;
+package com.javajunior.vetclinic.vetservice.model.dto;
 
-import com.javajunior.vetclinic.vetservice.model.DiseaseHistory;
-import com.javajunior.vetclinic.vetservice.model.Owner;
-import com.javajunior.vetclinic.vetservice.notdto.PetNotDTO;
+import com.javajunior.vetclinic.vetservice.model.domain.DiseaseHistory;
+import com.javajunior.vetclinic.vetservice.model.domain.Owner;
+import com.javajunior.vetclinic.vetservice.model.domain.Pet;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @Builder
@@ -20,8 +19,8 @@ public class PetDTO {
     private Owner owner;
     private DiseaseHistory diseaseHistory;
 
-    public PetNotDTO mapToNotDTO(PetDTO petDTO) {
-        return PetNotDTO.builder()
+    public static Pet map(PetDTO petDTO) {
+        return Pet.builder()
                 .name(petDTO.getName())
                 .breed(petDTO.getBreed())
                 .sex(petDTO.getSex())

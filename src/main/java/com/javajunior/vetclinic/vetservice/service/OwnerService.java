@@ -1,12 +1,12 @@
 package com.javajunior.vetclinic.vetservice.service;
 
-import com.javajunior.vetclinic.vetservice.dto.OwnerDTO;
-import com.javajunior.vetclinic.vetservice.exception.NotFoundException;
-import com.javajunior.vetclinic.vetservice.model.Owner;
+import com.javajunior.vetclinic.vetservice.model.dto.OwnerDTO;
+import com.javajunior.vetclinic.vetservice.model.domain.Owner;
 import com.javajunior.vetclinic.vetservice.repository.OwnerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.webjars.NotFoundException;
 
 import java.util.List;
 
@@ -17,12 +17,7 @@ public class OwnerService {
 
     @Transactional
     public Owner create(OwnerDTO owner) {
-        return ownerRepository.save(Owner.builder()
-                .name(owner.getName())
-                .address(owner.getAddress())
-                .phoneNumber(owner.getPhoneNumber())
-                .pets(owner.getPets())
-                .build());
+        return OwnerDTO.map(owner);
     }
 
     @Transactional(readOnly = true)
@@ -34,11 +29,6 @@ public class OwnerService {
     public Owner getOwnerById(final Long id) throws NotFoundException {
         return ownerRepository.findById(id).orElseThrow(() -> new NotFoundException("Owner with id " + id + " not found"));
     }
-
-//    @Transactional
-//    public Owner update(Owner owner) {
-//        return ownerRepository.save(owner);
-//    }
 
     @Transactional
     public Owner update(final Owner newOwner, Long id) throws NotFoundException {

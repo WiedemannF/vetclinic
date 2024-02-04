@@ -1,7 +1,7 @@
-package com.javajunior.vetclinic.vetservice.dto;
+package com.javajunior.vetclinic.vetservice.model.dto;
 
-import com.javajunior.vetclinic.vetservice.model.Pet;
-import com.javajunior.vetclinic.vetservice.notdto.OwnerNotDTO;
+import com.javajunior.vetclinic.vetservice.model.domain.Owner;
+import com.javajunior.vetclinic.vetservice.model.domain.Pet;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,8 +16,8 @@ public class OwnerDTO {
     private String phoneNumber;
     private List<Pet> pets;
 
-    public OwnerNotDTO mapToNotDTO(OwnerDTO ownerDTO) {
-        return OwnerNotDTO.builder()
+    public static Owner map(OwnerDTO ownerDTO) {
+        return Owner.builder()
                 .name(ownerDTO.getName())
                 .address(ownerDTO.getAddress())
                 .phoneNumber(ownerDTO.getPhoneNumber())

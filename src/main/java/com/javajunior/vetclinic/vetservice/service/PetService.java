@@ -1,12 +1,12 @@
 package com.javajunior.vetclinic.vetservice.service;
 
-import com.javajunior.vetclinic.vetservice.dto.PetDTO;
-import com.javajunior.vetclinic.vetservice.exception.NotFoundException;
-import com.javajunior.vetclinic.vetservice.model.Pet;
+import com.javajunior.vetclinic.vetservice.model.dto.PetDTO;
+import com.javajunior.vetclinic.vetservice.model.domain.Pet;
 import com.javajunior.vetclinic.vetservice.repository.PetRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.webjars.NotFoundException;
 
 import java.util.List;
 
@@ -17,14 +17,7 @@ public class PetService {
 
     @Transactional
     public Pet create(PetDTO pet) {
-        return petRepository.save(Pet.builder()
-                .name(pet.getName())
-                .breed(pet.getBreed())
-                .sex(pet.getSex())
-                .dateOfBirth(pet.getDateOfBirth())
-                .owner(pet.getOwner())
-                .diseaseHistory(pet.getDiseaseHistory())
-                .build());
+        return PetDTO.map(pet);
     }
 
     @Transactional(readOnly = true)
@@ -36,11 +29,6 @@ public class PetService {
     public Pet getPetById(final Long id) throws NotFoundException {
         return petRepository.findById(id).orElseThrow(() -> new NotFoundException("Pet with id " + id + " not found"));
     }
-
-//    @Transactional
-//    public Pet update(Pet pet) {
-//        return petRepository.save(pet);
-//    }
 
     @Transactional
     public Pet update(final Pet newPet, Long id) throws NotFoundException {

@@ -1,7 +1,7 @@
-package com.javajunior.vetclinic.vetservice.dto;
+package com.javajunior.vetclinic.vetservice.model.dto;
 
-import com.javajunior.vetclinic.vetservice.model.Doctor;
-import com.javajunior.vetclinic.vetservice.notdto.ClinicNotDTO;
+import com.javajunior.vetclinic.vetservice.model.domain.Clinic;
+import com.javajunior.vetclinic.vetservice.model.domain.Doctor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,8 +15,8 @@ public class ClinicDTO {
     private String address;
     private List<Doctor> doctors;
 
-    public ClinicNotDTO mapToNotDTO(ClinicDTO clinicDTO) {
-        return ClinicNotDTO.builder()
+    public static Clinic map(ClinicDTO clinicDTO) {
+        return Clinic.builder()
                 .name(clinicDTO.getName())
                 .address(clinicDTO.getAddress())
                 .doctors(clinicDTO.getDoctors())

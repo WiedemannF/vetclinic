@@ -1,8 +1,7 @@
 package com.javajunior.vetclinic.vetservice.controller;
 
-import com.javajunior.vetclinic.vetservice.dto.DiseaseHistoryDTO;
-import com.javajunior.vetclinic.vetservice.exception.NotFoundException;
-import com.javajunior.vetclinic.vetservice.model.DiseaseHistory;
+import com.javajunior.vetclinic.vetservice.model.dto.DiseaseHistoryDTO;
+import com.javajunior.vetclinic.vetservice.model.domain.DiseaseHistory;
 import com.javajunior.vetclinic.vetservice.service.DiseaseHistoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.webjars.NotFoundException;
 
 import java.util.List;
 

@@ -1,5 +1,6 @@
-package com.javajunior.vetclinic.vetservice.model;
+package com.javajunior.vetclinic.vetservice.model.domain;
 
+import com.javajunior.vetclinic.vetservice.model.dto.ClinicDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,15 @@ public class Clinic {
 
     @ManyToMany
     @JoinTable(name = "doctors",
-            joinColumns = @JoinColumn(name = "doctor_id"))
+            joinColumns = @JoinColumn(name = "clinic_id"),
+            inverseJoinColumns = @JoinColumn(name = "doctor_id"))
     private List<Doctor> doctors;
+
+    public ClinicDTO map(Clinic clinic) {
+        return ClinicDTO.builder()
+                .name(clinic.getName())
+                .address(clinic.getAddress())
+                .doctors(clinic.getDoctors())
+                .build();
+    }
 }

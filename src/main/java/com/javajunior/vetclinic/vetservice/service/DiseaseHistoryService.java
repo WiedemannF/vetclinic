@@ -1,12 +1,12 @@
 package com.javajunior.vetclinic.vetservice.service;
 
-import com.javajunior.vetclinic.vetservice.dto.DiseaseHistoryDTO;
-import com.javajunior.vetclinic.vetservice.exception.NotFoundException;
-import com.javajunior.vetclinic.vetservice.model.DiseaseHistory;
+import com.javajunior.vetclinic.vetservice.model.dto.DiseaseHistoryDTO;
+import com.javajunior.vetclinic.vetservice.model.domain.DiseaseHistory;
 import com.javajunior.vetclinic.vetservice.repository.DiseaseHistoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.webjars.NotFoundException;
 
 import java.util.List;
 
@@ -17,10 +17,7 @@ public class DiseaseHistoryService {
 
     @Transactional
     public DiseaseHistory create(DiseaseHistoryDTO diseaseHistory) {
-        return diseaseHistoryRepository.save(DiseaseHistory.builder()
-                .pet(diseaseHistory.getPet())
-                .diseaseCases(diseaseHistory.getDiseaseCases())
-                .build());
+        return DiseaseHistoryDTO.map(diseaseHistory);
     }
 
     @Transactional(readOnly = true)
@@ -32,11 +29,6 @@ public class DiseaseHistoryService {
     public DiseaseHistory getDiseaseHistoryById(final Long id) throws NotFoundException {
         return diseaseHistoryRepository.findById(id).orElseThrow(() -> new NotFoundException("DiseaseHistory with id " + id + " not found"));
     }
-
-//    @Transactional
-//    public DiseaseHistory update(DiseaseHistory diseaseHistory) {
-//        return diseaseHistoryRepository.save(diseaseHistory);
-//    }
 
     @Transactional
     public DiseaseHistory update(DiseaseHistory newDiseaseHistory, Long id) throws NotFoundException {
