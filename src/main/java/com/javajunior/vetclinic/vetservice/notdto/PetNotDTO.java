@@ -1,5 +1,6 @@
-package com.javajunior.vetclinic.vetservice.dto;
+package com.javajunior.vetclinic.vetservice.notdto;
 
+import com.javajunior.vetclinic.vetservice.dto.PetDTO;
 import com.javajunior.vetclinic.vetservice.model.DiseaseHistory;
 import com.javajunior.vetclinic.vetservice.model.Owner;
 import lombok.Builder;
@@ -16,7 +17,7 @@ public class PetNotDTO {
     private String sex;
     private LocalDate dateOfBirth;
     private Owner owner;
-    private List<DiseaseHistory> diseaseHistory;
+    private DiseaseHistory diseaseHistory;
 
     public PetDTO mapToDTO(PetNotDTO petNotDTO) {
         return PetDTO.builder()

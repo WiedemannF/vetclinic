@@ -1,6 +1,6 @@
 package com.javajunior.vetclinic.vetservice.dto;
 
-import jakarta.persistence.Column;
+import com.javajunior.vetclinic.vetservice.notdto.DoctorNotDTO;
 import lombok.Builder;
 import lombok.Data;
 

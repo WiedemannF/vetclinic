@@ -2,12 +2,14 @@ package com.javajunior.vetclinic.vetservice.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "doctors")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Doctor {

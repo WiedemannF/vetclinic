@@ -36,6 +36,7 @@ public class Pet {
             foreignKey = @ForeignKey(name = "FK_PETS_OWNER"))
     private Owner owner;
 
-    @JoinColumn(name = "disease_history_id")
+    @JoinColumn(name = "disease_history_id",
+            foreignKey = @ForeignKey(name = "FK_PETS_DISEASE_HISTORY"))
     private DiseaseHistory diseaseHistory;
 }

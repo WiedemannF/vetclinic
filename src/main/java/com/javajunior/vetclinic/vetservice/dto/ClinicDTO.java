@@ -1,6 +1,7 @@
 package com.javajunior.vetclinic.vetservice.dto;
 
 import com.javajunior.vetclinic.vetservice.model.Doctor;
+import com.javajunior.vetclinic.vetservice.notdto.ClinicNotDTO;
 import lombok.Builder;
 import lombok.Data;
 

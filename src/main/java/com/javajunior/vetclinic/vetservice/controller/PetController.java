@@ -1,10 +1,12 @@
 package com.javajunior.vetclinic.vetservice.controller;
 
+import com.javajunior.vetclinic.vetservice.dto.PetDTO;
 import com.javajunior.vetclinic.vetservice.exception.NotFoundException;
 import com.javajunior.vetclinic.vetservice.model.Pet;
 import com.javajunior.vetclinic.vetservice.service.PetService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,19 +15,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/pets")
 @Tag(name = "Питомцы", description = "Контроллер для работы с питомцами в сервисе ветеринарной клиники")
 public class PetController {
     private final PetService petService;
 
-    public PetController(PetService petService) {
-        this.petService = petService;
-    }
-
     @Operation(description = "Получить одного питомца")
     @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Pet> getPet(@RequestParam(value = "petId") Long id) throws NotFoundException {
-        Pet response = petService.getOnePet(id);
+        Pet response = petService.getPetById(id);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(response);
     }
@@ -42,9 +41,9 @@ public class PetController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<Pet> createPet(@RequestBody Pet newPet) {
+    public ResponseEntity<Pet> createPet(@RequestBody PetDTO pet) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(petService.create(newPet));
+                .body(petService.create(pet));
     }
 
     @Operation(description = "Обновить питомца")
@@ -54,13 +53,14 @@ public class PetController {
 
     public ResponseEntity<Pet> updatePet(@RequestBody Pet newPet,
                                          @RequestParam(value = "petId") Long petId) throws NotFoundException {
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity.status(HttpStatus.OK)
                 .body(petService.update(newPet, petId));
     }
 
     @Operation(description = " Удалить питомца по ID")
     @DeleteMapping(value = "/delete")
-    public void deletePet(@RequestParam(value = "petId") Long petId) throws NotFoundException {
+    public HttpStatus deletePet(@PathVariable(value = "petId") Long petId) {
         petService.delete(petId);
+        return HttpStatus.OK;
     }
 }
