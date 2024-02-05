@@ -15,22 +15,18 @@ import java.util.List;
 public class PetService {
     private final PetRepository petRepository;
 
-    @Transactional
     public Pet create(PetDTO pet) {
         return PetDTO.map(pet);
     }
 
-    @Transactional(readOnly = true)
     public List<Pet> getAllPets() {
         return petRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
     public Pet getPetById(final Long id) throws NotFoundException {
         return petRepository.findById(id).orElseThrow(() -> new NotFoundException("Pet with id " + id + " not found"));
     }
 
-    @Transactional
     public Pet update(final Pet newPet, Long id) throws NotFoundException {
         Pet existingPet = getPetById(id);
         existingPet.setName(newPet.getName());
@@ -42,7 +38,6 @@ public class PetService {
         return petRepository.save(existingPet);
     }
 
-    @Transactional
     public void delete(final Long id) {
         petRepository.deleteById(id);
     }

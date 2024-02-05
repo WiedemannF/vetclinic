@@ -15,22 +15,18 @@ import java.util.List;
 public class OwnerService {
     private final OwnerRepository ownerRepository;
 
-    @Transactional
     public Owner create(OwnerDTO owner) {
         return OwnerDTO.map(owner);
     }
 
-    @Transactional(readOnly = true)
     public List<Owner> getAllOwners() {
         return ownerRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
     public Owner getOwnerById(final Long id) throws NotFoundException {
         return ownerRepository.findById(id).orElseThrow(() -> new NotFoundException("Owner with id " + id + " not found"));
     }
 
-    @Transactional
     public Owner update(final Owner newOwner, Long id) throws NotFoundException {
         Owner existingOwner = getOwnerById(id);
         existingOwner.setName(newOwner.getName());
@@ -40,10 +36,8 @@ public class OwnerService {
         return ownerRepository.save(existingOwner);
     }
 
-    @Transactional
     public void delete(final Long id) {
         ownerRepository.deleteById(id);
     }
-
 
 }

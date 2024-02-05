@@ -32,7 +32,7 @@ public class Doctor {
 //    Не успел разобраться со связями, пока вылетает ошибка Could not determine recommended JdbcType for
 //    Java type 'com.javajunior.vetclinic.vetservice.model.domain.Doctor'
     @ManyToMany
-    @JoinTable(name = "clinics",
+    @JoinTable(name = "doctor_clinics",
             joinColumns = @JoinColumn(name = "doctor_id"),
             inverseJoinColumns = @JoinColumn(name = "clinic_id"))
     private List<Clinic> clinics;

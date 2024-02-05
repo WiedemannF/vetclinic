@@ -29,9 +29,7 @@ public class Owner {
     @Column(name = "phoneNumber", nullable = false)
     private String phoneNumber;
 
-    @OneToMany
-    @JoinColumn(name = "pets", nullable = false,
-            foreignKey = @ForeignKey(name = "FK_OWNERS_PET"))
+    @OneToMany(mappedBy = "owner")
     private List<Pet> pets;
 
     public OwnerDTO map(Owner owner) {

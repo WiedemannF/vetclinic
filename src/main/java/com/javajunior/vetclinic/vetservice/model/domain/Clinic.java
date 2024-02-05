@@ -26,10 +26,7 @@ public class Clinic {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @ManyToMany
-    @JoinTable(name = "doctors",
-            joinColumns = @JoinColumn(name = "clinic_id"),
-            inverseJoinColumns = @JoinColumn(name = "doctor_id"))
+    @ManyToMany(mappedBy = "clinics")
     private List<Doctor> doctors;
 
     public ClinicDTO map(Clinic clinic) {

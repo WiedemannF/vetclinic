@@ -15,22 +15,18 @@ import java.util.List;
 public class DiseaseCaseService {
     private final DiseaseCaseRepository diseaseCaseRepository;
 
-    @Transactional
     public DiseaseCase create(DiseaseCaseDTO diseaseCase) {
         return DiseaseCaseDTO.map(diseaseCase);
     }
 
-    @Transactional(readOnly = true)
     public List<DiseaseCase> getAllDiseaseCases() {
         return diseaseCaseRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
     public DiseaseCase getDiseaseCaseById(final Long id) throws NotFoundException {
         return diseaseCaseRepository.findById(id).orElseThrow(() -> new NotFoundException("DiseaseCase with id " + id + " not found"));
     }
 
-    @Transactional
     public DiseaseCase update(DiseaseCase newDiseaseCase, Long id) throws NotFoundException {
         DiseaseCase existingDiseaseCase = getDiseaseCaseById(id);
         existingDiseaseCase.setDoctor(newDiseaseCase.getDoctor());
@@ -39,7 +35,6 @@ public class DiseaseCaseService {
         return diseaseCaseRepository.save(existingDiseaseCase);
     }
 
-    @Transactional
     public void delete(final Long id) {
         diseaseCaseRepository.deleteById(id);
     }

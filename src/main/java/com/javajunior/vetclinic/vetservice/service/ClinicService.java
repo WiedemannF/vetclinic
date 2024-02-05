@@ -15,22 +15,18 @@ import java.util.List;
 public class ClinicService {
     private final ClinicRepository clinicRepository;
 
-    @Transactional
     public Clinic create(ClinicDTO clinic) {
         return ClinicDTO.map(clinic);
     }
 
-    @Transactional(readOnly = true)
     public List<Clinic> getAllClinics() {
         return clinicRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
     public Clinic getClinicById(final Long id) throws NotFoundException {
         return clinicRepository.findById(id).orElseThrow(() -> new NotFoundException("Clinic with id " + id + " not found"));
     }
 
-    @Transactional
     public Clinic update(Clinic newClinic, Long id) throws NotFoundException {
         Clinic existingClinic = getClinicById(id);
         existingClinic.setName(newClinic.getName());
@@ -39,7 +35,6 @@ public class ClinicService {
         return clinicRepository.save(existingClinic);
     }
 
-    @Transactional
     public void delete(final Long id) {
         clinicRepository.deleteById(id);
     }
