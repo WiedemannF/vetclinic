@@ -29,13 +29,14 @@ public class Doctor {
     @Column(name = "phoneNumber", nullable = false)
     private String phoneNumber;
 
-//    Не успел разобраться со связями, пока вылетает ошибка Could not determine recommended JdbcType for
-//    Java type 'com.javajunior.vetclinic.vetservice.model.domain.Doctor'
     @ManyToMany
     @JoinTable(name = "doctor_clinics",
-            joinColumns = @JoinColumn(name = "doctor_id"),
-            inverseJoinColumns = @JoinColumn(name = "clinic_id"))
+            joinColumns = @JoinColumn(name = "clinic_id"),
+            inverseJoinColumns = @JoinColumn(name = "doctor_id"))
     private List<Clinic> clinics;
+
+    @OneToMany(mappedBy = "doctor")
+    private List<DiseaseCase> diseaseCases;
 
     public DoctorDTO map(Doctor doctor) {
         return DoctorDTO.builder()
@@ -43,6 +44,7 @@ public class Doctor {
                 .address(doctor.getAddress())
                 .phoneNumber(doctor.getPhoneNumber())
                 .clinics(doctor.getClinics())
+                .diseaseCases(doctor.getDiseaseCases())
                 .build();
     }
 }

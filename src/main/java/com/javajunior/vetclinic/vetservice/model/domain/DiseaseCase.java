@@ -21,6 +21,7 @@ public class DiseaseCase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
@@ -30,11 +31,16 @@ public class DiseaseCase {
     @Column(name = "case_description")
     private String caseDescription;
 
+    @ManyToOne
+    @JoinColumn(name = "disease_history_id")
+    private DiseaseHistory diseaseHistory;
+
     public DiseaseCaseDTO map(DiseaseCase diseaseCase) {
         return DiseaseCaseDTO.builder()
                 .doctor(diseaseCase.getDoctor())
                 .date(diseaseCase.getDate())
                 .caseDescription(diseaseCase.getCaseDescription())
+                .diseaseHistory(diseaseCase.getDiseaseHistory())
                 .build();
     }
 }

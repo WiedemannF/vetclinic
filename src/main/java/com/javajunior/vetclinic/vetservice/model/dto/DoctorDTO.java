@@ -1,6 +1,7 @@
 package com.javajunior.vetclinic.vetservice.model.dto;
 
 import com.javajunior.vetclinic.vetservice.model.domain.Clinic;
+import com.javajunior.vetclinic.vetservice.model.domain.DiseaseCase;
 import com.javajunior.vetclinic.vetservice.model.domain.Doctor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ public class DoctorDTO {
     private String address;
     private String phoneNumber;
     private List<Clinic> clinics;
+    private List<DiseaseCase> diseaseCases;
 
     public static Doctor map(DoctorDTO doctorDTO) {
         return Doctor.builder()
@@ -22,6 +24,7 @@ public class DoctorDTO {
                 .address(doctorDTO.getAddress())
                 .phoneNumber(doctorDTO.getPhoneNumber())
                 .clinics(doctorDTO.getClinics())
+                .diseaseCases(doctorDTO.getDiseaseCases())
                 .build();
     }
 }

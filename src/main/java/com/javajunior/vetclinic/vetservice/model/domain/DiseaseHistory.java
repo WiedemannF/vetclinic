@@ -24,8 +24,7 @@ public class DiseaseHistory {
     @JoinColumn(name = "pet_id", nullable = false)
     private Pet pet;
 
-    @OneToMany
-    @JoinColumn(name = "disease_case_id")
+    @OneToMany(mappedBy = "diseaseHistory")
     private List<DiseaseCase> diseaseCases;
 
     public DiseaseHistoryDTO map(DiseaseHistory diseaseHistory) {
