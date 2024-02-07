@@ -20,8 +20,7 @@ public class DiseaseHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "pet_id", nullable = false)
+    @OneToOne(mappedBy = "diseaseHistory")
     private Pet pet;
 
     @OneToMany(mappedBy = "diseaseHistory")

@@ -31,8 +31,8 @@ public class Doctor {
 
     @ManyToMany
     @JoinTable(name = "doctor_clinics",
-            joinColumns = @JoinColumn(name = "clinic_id"),
-            inverseJoinColumns = @JoinColumn(name = "doctor_id"))
+            joinColumns = @JoinColumn(name = "doctor_id"),
+            inverseJoinColumns = @JoinColumn(name = "clinic_id"))
     private List<Clinic> clinics;
 
     @OneToMany(mappedBy = "doctor")

@@ -33,13 +33,11 @@ public class Pet {
     private LocalDate dateOfBirth;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id", nullable = false,
-            foreignKey = @ForeignKey(name = "FK_PETS_OWNER"))
+    @JoinColumn(name = "owner_id", nullable = false)
     private Owner owner;
 
-    @OneToOne
-    @JoinColumn(name = "disease_history_id",
-            foreignKey = @ForeignKey(name = "FK_PETS_DISEASE_HISTORY"))
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "disease_history_id", referencedColumnName = "id")
     private DiseaseHistory diseaseHistory;
 
     public PetDTO map(Pet pet) {
