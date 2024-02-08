@@ -1,5 +1,7 @@
 package com.javajunior.vetclinic.vetservice.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.javajunior.vetclinic.vetservice.model.dto.OwnerDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,6 +31,7 @@ public class Owner {
     @Column(name = "phoneNumber", nullable = false)
     private String phoneNumber;
 
+    @JsonIgnoreProperties({"name", "breed", "sex", "dateOfBirth", "owner", "diseaseHistory"})
     @OneToMany(mappedBy = "owner")
     private List<Pet> pets;
 

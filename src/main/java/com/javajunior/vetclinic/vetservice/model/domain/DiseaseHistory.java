@@ -1,5 +1,6 @@
 package com.javajunior.vetclinic.vetservice.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.javajunior.vetclinic.vetservice.model.dto.DiseaseHistoryDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,9 +21,12 @@ public class DiseaseHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "diseaseHistory")
+    @JsonIgnoreProperties({"name", "breed", "sex", "dateOfBirth", "owner", "diseaseHistory"})
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pet_id", referencedColumnName = "id")
     private Pet pet;
 
+    @JsonIgnoreProperties({"doctor", "date", "caseDescription", "diseaseHistory"})
     @OneToMany(mappedBy = "diseaseHistory")
     private List<DiseaseCase> diseaseCases;
 

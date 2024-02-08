@@ -1,5 +1,6 @@
 package com.javajunior.vetclinic.vetservice.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.javajunior.vetclinic.vetservice.model.dto.DoctorDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,12 +30,14 @@ public class Doctor {
     @Column(name = "phoneNumber", nullable = false)
     private String phoneNumber;
 
+    @JsonIgnoreProperties({"name", "address", "doctors"})
     @ManyToMany
     @JoinTable(name = "doctor_clinics",
             joinColumns = @JoinColumn(name = "doctor_id"),
             inverseJoinColumns = @JoinColumn(name = "clinic_id"))
     private List<Clinic> clinics;
 
+    @JsonIgnoreProperties({"doctor", "date", "caseDescription", "diseaseHistory"})
     @OneToMany(mappedBy = "doctor")
     private List<DiseaseCase> diseaseCases;
 

@@ -1,5 +1,7 @@
 package com.javajunior.vetclinic.vetservice.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.javajunior.vetclinic.vetservice.model.dto.PetDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,12 +34,13 @@ public class Pet {
     @Column(name = "date_of_birth", nullable = false)
     private LocalDate dateOfBirth;
 
+    @JsonIgnoreProperties({"name", "address", "phoneNumber", "pets"})
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
     private Owner owner;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "disease_history_id", referencedColumnName = "id")
+    @JsonIgnoreProperties({"pet", "diseaseCases"})
+    @OneToOne(mappedBy = "pet")
     private DiseaseHistory diseaseHistory;
 
     public PetDTO map(Pet pet) {

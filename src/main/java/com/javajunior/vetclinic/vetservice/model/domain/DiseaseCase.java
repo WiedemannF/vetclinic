@@ -1,5 +1,6 @@
 package com.javajunior.vetclinic.vetservice.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.javajunior.vetclinic.vetservice.model.dto.DiseaseCaseDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,7 @@ public class DiseaseCase {
     @Column(name = "case_description")
     private String caseDescription;
 
+    @JsonIgnoreProperties({"pet", "diseaseCases"})
     @ManyToOne
     @JoinColumn(name = "disease_history_id")
     private DiseaseHistory diseaseHistory;
