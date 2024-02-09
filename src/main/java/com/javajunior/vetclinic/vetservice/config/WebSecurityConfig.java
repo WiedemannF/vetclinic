@@ -33,7 +33,7 @@ public class WebSecurityConfig {
                 .build();
     }
 
-        @Bean
+    @Bean
     public UserDetailsService userDetailsService() {
         UserDetails userDetails = User.builder()
                 .username(USERNAME)

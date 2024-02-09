@@ -60,6 +60,3 @@ insert into disease_cases(case_description, date, doctor_id, disease_history_id)
 insert into disease_cases(case_description, date, doctor_id, disease_history_id) values ('Заболел хвост, вылечили', '2024-03-02', 2, 5);
 
 commit
-
-
-

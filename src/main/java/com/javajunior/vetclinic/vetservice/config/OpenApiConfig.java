@@ -13,7 +13,7 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("Сервис ветеринарной клиники")
-                        .description("hello")
+                        .description("Полный спектр ветеринарных услуг круглосуточно!")
                         .version("1.0")
                         .contact(new Contact().name("Fedor Wiedemann")
                                 .email("my@email.com"))

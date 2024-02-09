@@ -27,7 +27,7 @@ public class Clinic {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @JsonIgnoreProperties({"name", "address", "phoneNumber"})
+    @JsonIgnoreProperties({"name", "address", "phoneNumber", "clinics", "diseaseCases"})
     @ManyToMany(mappedBy = "clinics")
     private List<Doctor> doctors;
 
